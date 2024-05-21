@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentContainerInInventory"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <GridView
+        android:id="@+id/dataGridView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="2" />
+
+    <Button
+        android:id="@+id/addDataButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Data"/>
+
+    <Button
+        android:id="@+id/deleteDataButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Selected Data"/>
+
+    <Button
+        android:id="@+id/updateQuantityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Quantity" />
+
+    <!-- Add Logout Button -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+</LinearLayout>
+

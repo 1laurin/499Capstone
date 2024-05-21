@@ -1,0 +1,9 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wireframe"
+    android:layout_width="393dp"
+    android:layout_height="852dp"
+    android:clipToOutline="true"
+    android:background="#D1637091"
+    />
+

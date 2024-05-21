@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/fragment_permission_prompt.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To receive automated notifications, grant SMS permission."
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/requestPermissionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoTextView"
+        android:layout_marginTop="31dp"
+        android:layout_marginLeft="71dp"
+        android:text="Request SMS Permission" />
+
+</RelativeLayout>
