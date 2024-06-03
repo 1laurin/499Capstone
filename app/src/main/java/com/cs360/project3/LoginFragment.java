@@ -1,5 +1,6 @@
 package com.cs360.project3;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class LoginFragment extends Fragment {
 
@@ -104,15 +108,76 @@ public class LoginFragment extends Fragment {
     }
 
     private void performLogin(String username, String password) {
-        // Check if SMS permission is granted
-        if (isSmsPermissionGranted()) {
-            // Continue with the login process
-            continueLogin(username, password);
+        // Ensure dbHelper is not null before accessing its methods
+        if (dbHelper != null) {
+            try (SQLiteDatabase db = dbHelper.getReadableDatabase()) {
+                // Query to retrieve the hashed password and salt based on the entered username
+                Cursor cursor = db.rawQuery("SELECT " + DatabaseHelper.COLUMN_PASSWORD + ", " + DatabaseHelper.COLUMN_SALT +
+                                " FROM " + DatabaseHelper.TABLE_USERS + " WHERE " + DatabaseHelper.COLUMN_USERNAME + "=?",
+                        new String[]{username});
+
+                if (cursor.moveToFirst()) {
+                    // Retrieve the hashed password and salt from the database
+                    @SuppressLint("Range") String hashedPasswordFromDb = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PASSWORD));
+                    @SuppressLint("Range") String salt = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_SALT));
+
+                    // Convert the salt string to a byte array
+                    byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+
+                    // Hash the entered password using the retrieved salt
+                    String hashedPassword = Arrays.toString(PasswordHashing.hashPassword(password, saltBytes));
+
+
+                    // Compare the hashed passwords
+                    if (hashedPasswordFromDb.equals(hashedPassword)) {
+                        // Passwords match, login successful
+                        // Retrieve the user ID and role
+                        int idColumnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ID);
+                        int roleColumnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ROLE);
+
+                        if (idColumnIndex != -1 && roleColumnIndex != -1) {
+                            long userId = cursor.getLong(idColumnIndex);
+                            String userRole = cursor.getString(roleColumnIndex);
+
+                            // Save the user ID and role to shared preferences
+                            saveUserIdToPreferences(userId);
+                            saveUserRoleToPreferences(userRole);
+
+                            // Grant access based on user role
+                            grantAccess(userRole);
+
+                            // Login successful
+                            Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                }
+
+                // Login failed
+                Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Handle exceptions, log an error, etc.
+            }
         } else {
-            // If SMS permission is not granted, show the permission prompt
-            ((MainActivity) requireActivity()).loadPermissionPromptFragment();
+            // Handle dbHelper being null
         }
     }
+
+
+    private void grantAccess(String userRole) {
+        if (userRole.equals("Admin")) {
+            // Grant access to admin features
+            loadAdminFragment();
+        } else if (userRole.equals("Manager")) {
+            // Grant access to manager features
+            loadInventoryFragment();
+        } else {
+            // Grant access to basic user features
+            loadInventoryFragment(); // Load the inventory fragment for regular users
+        }
+    }
+
 
     private void continueLogin(String username, String password) {
         // Ensure dbHelper is not null before accessing its methods
@@ -124,22 +189,25 @@ public class LoginFragment extends Fragment {
                         DatabaseHelper.COLUMN_PASSWORD + "=?", new String[]{username, password});
 
                 if (cursor.getCount() > 0) {
-                    // User found, retrieve the user ID
+                    // User found, retrieve the user ID and role
                     if (cursor.moveToFirst()) {
-                        int columnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ID);
+                        int idColumnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ID);
+                        int roleColumnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ROLE);
 
                         // Check if the column index is valid
-                        if (columnIndex != -1) {
-                            long userId = cursor.getLong(columnIndex);
+                        if (idColumnIndex != -1 && roleColumnIndex != -1) {
+                            long userId = cursor.getLong(idColumnIndex);
+                            String userRole = cursor.getString(roleColumnIndex);
 
-                            // Save the user ID to shared preferences
+                            // Save the user ID and role to shared preferences
                             saveUserIdToPreferences(userId);
+                            saveUserRoleToPreferences(userRole);
 
                             // Login successful
                             Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to the InventoryFragment
-                            loadInventoryFragment();
+                            // Grant access based on user role
+                            grantAccess(userRole);
                         } else {
                             // Handle the case where the column index is not found
                             Log.e("LoginFragment", "Column not found: " + DatabaseHelper.COLUMN_ID);
@@ -157,6 +225,27 @@ public class LoginFragment extends Fragment {
             // Handle dbHelper being null
         }
     }
+
+    private void saveUserRoleToPreferences(String userRole) {
+        SharedPreferences preferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // Save the user role
+        editor.putString("user_role", userRole);
+        editor.apply();
+    }
+
+
+    private void loadAdminFragment() {
+        // Load the admin fragment or activity
+        ((MainActivity) requireActivity()).loadAdminFragment();
+    }
+
+    private void loadManagerFragment() {
+        // Load the manager fragment or activity
+        ((MainActivity) requireActivity()).loadManagerFragment();
+    }
+
 
     private boolean isSmsPermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

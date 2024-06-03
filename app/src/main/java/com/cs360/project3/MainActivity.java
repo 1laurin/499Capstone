@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
     public void loadDeleteFragment() {
         Log.d("MainActivity", "Before transaction: loading DeleteFragment");
 
-        // Create an instance of your DeleteFragment (you might need to create this class)
         DeleteFragment deleteFragment = new DeleteFragment();
         deleteFragment.setDatabaseHelper(dbHelper);  // Set the database helper if needed
 
@@ -139,6 +141,22 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragmentContainer, updateQuantityFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void loadAdminFragment() {
+        loadFragment(new AdminFragment());
+    }
+
+    public void loadManagerFragment() {
+        loadFragment(new ManagerFragment());
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void manageInventory() {

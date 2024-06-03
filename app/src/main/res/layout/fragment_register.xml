@@ -25,6 +25,11 @@
         android:layout_height="wrap_content"
         android:hint="Phone Number"
         android:inputType="phone" />
+    <Spinner
+        android:id="@+id/roleSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/role_array" />
 
     <Button
         android:id="@+id/registerButton"

@@ -1,7 +1,6 @@
 package com.cs360.project3;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.util.Log;
-
 
 import androidx.fragment.app.Fragment;
 
@@ -20,6 +19,7 @@ public class RegisterFragment extends Fragment {
     private View view;
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private Spinner roleSpinner;
     private Button registerButton;
     private DatabaseHelper dbHelper;
 
@@ -35,6 +35,7 @@ public class RegisterFragment extends Fragment {
         // Access UI elements
         usernameEditText = view.findViewById(R.id.usernameEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
+        roleSpinner = view.findViewById(R.id.roleSpinner);
         registerButton = view.findViewById(R.id.registerButton);
 
         dbHelper = new DatabaseHelper(requireContext()); // Initialize the DatabaseHelper
@@ -48,20 +49,21 @@ public class RegisterFragment extends Fragment {
     private void registerUser() {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        String role = roleSpinner.getSelectedItem().toString();
 
         // Call a method to perform user registration with the provided details
-        performRegistration(username, password);
+        performRegistration(username, password, role);
     }
 
-    private void performRegistration(String username, String password) {
+    private void performRegistration(String username, String password, String role) {
         // Ensure dbHelper is not null before accessing its methods
         if (dbHelper != null) {
             try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
-                // Add your user registration logic here...
-                // For example, you can insert the user details into the database
+                // Add user registration logic here...
                 ContentValues values = new ContentValues();
                 values.put(DatabaseHelper.COLUMN_USERNAME, username);
                 values.put(DatabaseHelper.COLUMN_PASSWORD, password);
+                values.put(DatabaseHelper.COLUMN_ROLE, role);
 
                 long newRowId = db.insert(DatabaseHelper.TABLE_USERS, null, values);
 
@@ -86,7 +88,6 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-
     // Add this method to navigate to the login screen
     private void loadLoginFragment() {
         // Replace the contents of fragmentContainer with the login screen
@@ -95,4 +96,3 @@ public class RegisterFragment extends Fragment {
                 .commit();
     }
 }
-

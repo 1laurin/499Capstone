@@ -27,6 +27,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_NAME = "item_name";
     public static final String COLUMN_ITEM_QUANTITY = "quantity";
 
+    public static final String COLUMN_ROLE = "role";
+
+
     private static long currentUserId = -1; // Initialize with an invalid value
 
     public static void setCurrentUserId(long userId) {
@@ -37,15 +40,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return currentUserId;
     }
 
+    public static final String COLUMN_SALT ="salt";
 
     // Constraints
+    // Updated user table creation SQL
     private static final String USER_TABLE_CONSTRAINTS =
             "CREATE TABLE " + TABLE_USERS + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_USERNAME + " TEXT UNIQUE, " +
                     COLUMN_PASSWORD + " TEXT, " +
+                    COLUMN_SALT + " TEXT, " +  // Added salt column
                     COLUMN_PHONE_NUMBER + " TEXT, " +
-                    COLUMN_SMS_OPT_IN + " INTEGER DEFAULT 0)"; 
+                    COLUMN_SMS_OPT_IN + " INTEGER DEFAULT 0, " +
+                    COLUMN_ROLE + " TEXT DEFAULT 'User')";
+
+
 
 
     private static final String INVENTORY_TABLE_CONSTRAINTS =
@@ -70,11 +79,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop the old tables and recreate them
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INVENTORY);
-        onCreate(db);
+        if (oldVersion < 5) {  // Check the old version to conditionally upgrade
+            // Add the role column if it doesn't exist
+            db.execSQL("ALTER TABLE " + TABLE_USERS + " ADD COLUMN " + COLUMN_ROLE + " TEXT DEFAULT 'User'");
+        } else {
+            // Drop the old tables and recreate them if not upgrading from an old version
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_INVENTORY);
+            onCreate(db);
+        }
     }
+
 
     // Insert a new inventory entry
     public long insertInventoryEntry(String itemName, int quantity) {
@@ -168,6 +183,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
     }
+
+    // Method to update the user role
+    public void updateUserRole(long userId, String newRole) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ROLE, newRole);
+
+            int updatedRows = db.update(TABLE_USERS, values, COLUMN_ID + "=?", new String[]{String.valueOf(userId)});
+
+            if (updatedRows > 0) {
+                Log.d("DatabaseHelper", "Updated role for user with ID: " + userId);
+            } else {
+                Log.e("DatabaseHelper", "Failed to update role for user with ID: " + userId);
+            }
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "Error updating role for user with ID: " + userId, e);
+        } finally {
+            db.close();
+        }
+    }
+
 
     public void updateQuantity(long entryId, int newQuantity) {
         SQLiteDatabase db = this.getWritableDatabase();

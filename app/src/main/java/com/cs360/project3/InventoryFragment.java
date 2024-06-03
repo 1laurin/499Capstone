@@ -54,6 +54,24 @@ public class InventoryFragment extends Fragment {
         updateQuantityButton = view.findViewById(R.id.updateQuantityButton);
         logoutButton = view.findViewById(R.id.logoutButton);
 
+        // Get user role
+        String userRole = getUserRole();
+
+        // Show or hide buttons based on user role
+        if ("User".equals(userRole)) {
+            // For users with role "User", show only the Add Data button
+            addDataButton.setVisibility(View.VISIBLE);
+            deleteDataButton.setVisibility(View.GONE);
+            updateQuantityButton.setVisibility(View.GONE);
+            logoutButton.setVisibility(View.VISIBLE);
+        } else {
+            // For other roles, show all buttons
+            addDataButton.setVisibility(View.VISIBLE);
+            deleteDataButton.setVisibility(View.VISIBLE);
+            updateQuantityButton.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.VISIBLE);
+        }
+
         addDataButton.setOnClickListener(v -> onAddDataButtonClick());
         deleteDataButton.setOnClickListener(v -> onDeleteDataButtonClick());
         updateQuantityButton.setOnClickListener(v -> onUpdateQuantityButtonClick());
@@ -61,9 +79,16 @@ public class InventoryFragment extends Fragment {
 
         loadInventoryData();
 
-
         return view;
     }
+
+    private String getUserRole() {
+        // Get the shared preferences
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        // Retrieve the user's role from shared preferences
+        return sharedPreferences.getString("user_role", "User"); // Default to "User" if not found
+    }
+
 
     private void onAddDataButtonClick() {
         ((MainActivity) requireActivity()).loadAddDataFragment();
