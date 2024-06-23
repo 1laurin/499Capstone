@@ -24,7 +24,7 @@ As part of my own practice, I have enhanced and refined the selected artifacts b
 
 ### Self-Assesment
 
-[Journal: Self-Assement](https://github.com/1laurin/499Capstone/blob/76c85ed143cb211f62afc2f02fa1affcfeac4a30/CS499%20Documents/Assignment%201%20-%20Initial%20Plan.pdf "Journal: Self-Introduction")
+[Journal: Self-Assement](https://github.com/1laurin/499Capstone/blob/d18142dc1058dd5d5ba5efcf2d448a840e531374/CS499%20Documents/Self%20Assessment.pdf)
 
 
 
