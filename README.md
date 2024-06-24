@@ -51,7 +51,7 @@ Enhancements: A walk-through of the planned enhancements that address the issues
 ### Software Design and Engineering Enhancement
 
 [Software Design and Engineering Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%201%20-%20Narrative%20Final.pdf) </br>
-[Software Design - Application Demo](https://youtu.be/r9EonyBs9I8?rel=0 "Salvare Search for Rescue Web App - Demo")
+[Software Design - Application Demo](https://youtu.be/nE_3VWvcaRg)
 
 This document explains why I chose to include a particular project in the "Software Design and Engineering" section of my portfolio. It also describes how I created this project and what I learned along the way.
 
@@ -70,16 +70,17 @@ The narrative goes into more detail about the specific problems I encountered, h
 
 ### Algorithms and Data Structure Enhancement
 
-[Algorithms and Data Structure Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%202%20-%20Narrative%20Final.pdf) </br>
-[DSA - Android Application Demo](https://youtu.be/r9EonyBs9I8?rel=0 "Salvare Search for Rescue Web App - Demo")
+[Algorithms and Data Structure Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%202%20-%20Narrative%20Final.pdf) 
+</br>
+[DSA - Android Application Demo](https://youtu.be/948FiuoEFC8)
 
 This document explains why I chose to include a specific project in the "Algorithms and Data Structures" section of my portfolio. It also describes how I created this project and, most importantly, what I learned during the process.
 The project I'm showcasing here demonstrates my ability to work with algorithms (step-by-step procedures and data structures. These are fundamental concepts in computer science and are crucial for creating efficient and effective software.
 
 ### Databases Enhancement
 
-[Databases Narrative](CS499/CS499-M5-2_Paper.pdf "Databases - Salvare Search for Rescue Web App")</br>
-[Databases - Android Application Demo](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%203%20-%20Database%20Narrative.pdf)
+[Databases Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%203%20-%20Database%20Narrative.pdf) </br>
+[Databases - Android Application Demo](https://youtu.be/9VAqNU6Q6tk)
 
 This document explains why I chose to include a specific project in the "Databases" section of my portfolio. It also describes how I created this project and, most importantly, what I learned during the process.
 The project I'm showcasing here demonstrates my skills in working with databases. Databases are essential in modern computing - they're used to store, organize, and manage large amounts of information efficiently.
