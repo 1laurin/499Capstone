@@ -71,7 +71,7 @@ The narrative goes into more detail about the specific problems I encountered, h
 ### Algorithms and Data Structure Enhancement
 
 [Algorithms and Data Structure Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%202%20-%20Narrative%20Final.pdf) </br>
-[DSA - Android Application Demo](https://youtu.be/r9EonyBs9I8?rel=0 "Salvare Search for Rescue Web App - Demo")
+[DSA - Android Application Demo](https://youtu.be/948FiuoEFC8)
 
 This document explains why I chose to include a specific project in the "Algorithms and Data Structures" section of my portfolio. It also describes how I created this project and, most importantly, what I learned during the process.
 The project I'm showcasing here demonstrates my ability to work with algorithms (step-by-step procedures and data structures. These are fundamental concepts in computer science and are crucial for creating efficient and effective software.
