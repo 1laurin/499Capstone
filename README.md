@@ -70,7 +70,8 @@ The narrative goes into more detail about the specific problems I encountered, h
 
 ### Algorithms and Data Structure Enhancement
 
-[Algorithms and Data Structure Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%202%20-%20Narrative%20Final.pdf) </br>
+[Algorithms and Data Structure Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%202%20-%20Narrative%20Final.pdf) 
+</br>
 [DSA - Android Application Demo](https://youtu.be/948FiuoEFC8)
 
 This document explains why I chose to include a specific project in the "Algorithms and Data Structures" section of my portfolio. It also describes how I created this project and, most importantly, what I learned during the process.
@@ -78,7 +79,7 @@ The project I'm showcasing here demonstrates my ability to work with algorithms 
 
 ### Databases Enhancement
 
-[Databases Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%203%20-%20Database%20Narrative.pdf)</br>
+[Databases Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%203%20-%20Database%20Narrative.pdf) </br>
 [Databases - Android Application Demo](https://youtu.be/9VAqNU6Q6tk)
 
 This document explains why I chose to include a specific project in the "Databases" section of my portfolio. It also describes how I created this project and, most importantly, what I learned during the process.
