@@ -51,7 +51,7 @@ Enhancements: A walk-through of the planned enhancements that address the issues
 ### Software Design and Engineering Enhancement
 
 [Software Design and Engineering Narrative](https://github.com/1laurin/499Capstone/blob/2cc5385709a0984f33a6487bef2a43fa26ccf96c/CS499%20Documents/Artifact%201%20-%20Narrative%20Final.pdf) </br>
-[Software Design - Application Demo](https://youtu.be/r9EonyBs9I8?rel=0 "Salvare Search for Rescue Web App - Demo")
+[Software Design - Application Demo](https://youtu.be/nE_3VWvcaRg)
 
 This document explains why I chose to include a particular project in the "Software Design and Engineering" section of my portfolio. It also describes how I created this project and what I learned along the way.
 
