@@ -1,4 +1,4 @@
-# ePortfolio
+# Laurin Brittain's ePortfolio
 
 ---
 
